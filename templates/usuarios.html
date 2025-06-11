@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Usuários</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body class="container py-5">
+
+    <h2 class="mb-4">Cadastro de Usuários</h2>
+
+    <form method="post" class="mb-4">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Salvar Usuário</button>
+        <a href="{% url 'home' %}" class="btn btn-secondary">Voltar</a>
+    </form>
+
+    <h3>Lista de Usuários</h3>
+    <table class="table table-bordered">
+        <thead class="table-dark">
+            <tr>
+                <th>Usuário</th>
+                <th>Email</th>
+                <th>Staff</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for usuario in usuarios %}
+                <tr>
+                    <td>{{ usuario.username }}</td>
+                    <td>{{ usuario.email }}</td>
+                    <td>{{ usuario.is_staff }}</td>
+                </tr>
+            {% empty %}
+                <tr><td colspan="3" class="text-center">Nenhum usuário cadastrado.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</body>
+</html>
